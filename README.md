@@ -21,4 +21,4 @@ Getting attacked in a cave: 1/6
 Nothing: everything else  
 
 # How to run
-To run the game first set the default app this is ran with to the command prompt. Then double click the file to start the game.
+To run the game first set the default app to the command prompt. Then double click the file to start the game.
