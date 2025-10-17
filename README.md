@@ -1,4 +1,4 @@
-# Craftmine-Terminal-Edition
+# Craftmine: Terminal Edition
 This is my first project and is the first version of my terminal-based text game where you try and survive 100 days.  
 It's writen in python for simplicity, it's currently in an early stage.  
 
