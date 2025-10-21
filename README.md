@@ -26,4 +26,4 @@ To run the game first set the default app to the command prompt. Then double cli
 If you don't then you can download it here: https://www.python.org/downloads/
 
 
-*Note: v1.2.0 coming soon*
+*Note: v1.1.0 coming soon*
