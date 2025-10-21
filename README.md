@@ -1,6 +1,6 @@
 # Craftmine: Terminal Edition
 This is my first project and is the first version of my terminal-based text game where you try and survive 100 days.  
-It's writen in python for simplicity, it's currently in an early stage.  
+It's writen in python for simplicity, it's currently in version 1.0.0.  
 
 ## Actions
 help - brings up the help menu with all the actions  
@@ -17,6 +17,7 @@ Found scraps: 1/3
 Village: 1/12  
 Tree: 1/6  
 Rock: 1/8  
+Cave: 1/12  
 Getting attacked in a cave: 1/6  
 Nothing: everything else  
 
