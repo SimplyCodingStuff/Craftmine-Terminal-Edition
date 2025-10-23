@@ -10,6 +10,7 @@ give up - you decide to lose
 advanced resources - lists all the advance resources and how much of them you have  
 difficulty - allows you to change the difficulty  
 objective - displays how to beat the game  
+portal - asks you if you want to enter the portal if you have discovered a portal  
 nothing - you do nothing but rest, there's also a 1/3 chance you heal some  
 
 ## Locations and Events + chances
