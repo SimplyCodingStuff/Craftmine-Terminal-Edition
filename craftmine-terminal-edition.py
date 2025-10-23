@@ -20,6 +20,10 @@ exploreEventItems = ''
 day = 0
 health = 12
 difficulty = 'n'
+dimension = 'overworld'
+portalFound = 'false'
+playAgain = ''
+enterPortal = ''
 
 # clear_terminal() just clears the terminal for better visuals
 def clear_terminal():
@@ -31,66 +35,80 @@ def clear_terminal():
 
 # explore() is where the player has a random chance to find item(s), locations, or trigger an event
 def explore():
-    global wood, stone, inventory, exploreEventItems, exploreEvent, bread, wheat, iron
-    # Tree event
-    if random.randint(1,6) == 1 and 'stone axe' in inventory or 'iron axe' in inventory:
-        exploreEventItems = random.randint(3,8)
-        exploreEvent = "a tree"
-        wood += exploreEventItems
-        exploreEventItems = f"got +{exploreEventItems} wood"
-        done_exploring()
-        return
-    # Stone event
-    elif random.randint(1,8) == 1 and 'stone pick' in inventory or 'iron pick' in inventory:
-        exploreEventItems = random.randint(2,5)
-        exploreEvent = "a large rock"
-        stone += exploreEventItems
-        exploreEventItems = f"got +{exploreEventItems} stone"
-        done_exploring()
-        return
-    # Village event
-    elif random.randint(1,12) == 1:
-        exploreEventItems = random.randint(3,8)
-        exploreEvent = 'village'
-        bread += exploreEventItems
-        exploreEventItems = f"+{exploreEventItems} bread"
-        done_exploring()
-        return
-    # Cave event
-    elif random.randint(1,12) == 1:
-        if random.randint(1,6) == 1 and difficulty == 'n':
-            if 'stone axe' in inventory or 'iron axe' in inventory:
-                exploreEventItems = 'you got attacked by zombies and tried to defend yourself with your stone axe. -health'
+    global wood, stone, inventory, exploreEventItems, exploreEvent, bread, wheat, iron, portalFound, dimension
+    if dimension == 'overworld':
+        # Tree event
+        if random.randint(1,6) == 1 and 'stone axe' in inventory or 'iron axe' in inventory:
+            exploreEventItems = random.randint(3,8)
+            exploreEvent = "a tree"
+            wood += exploreEventItems
+            exploreEventItems = f"got +{exploreEventItems} wood"
+            done_exploring()
+            return
+        # Stone event
+        elif random.randint(1,8) == 1 and 'stone pick' in inventory or 'iron pick' in inventory:
+            exploreEventItems = random.randint(2,5)
+            exploreEvent = "a large rock"
+            stone += exploreEventItems
+            exploreEventItems = f"got +{exploreEventItems} stone"
+            done_exploring()
+            return
+        # Village event
+        elif random.randint(1,12) == 1:
+            exploreEventItems = random.randint(3,8)
+            exploreEvent = 'village'
+            bread += exploreEventItems
+            exploreEventItems = f"+{exploreEventItems} bread"
+            done_exploring()
+            return
+        # Cave event
+        elif random.randint(1,12) == 1:
+            if random.randint(1,6) == 1 and difficulty == 'n':
+                if 'stone axe' in inventory or 'iron axe' in inventory:
+                    exploreEventItems = 'you got attacked by zombies and tried to defend yourself with your stone axe. -health'
+                    exploreEvent = 'a cave'
+                    health -= random.randint(0,2)
+                    done_exploring()
+                    return
+                else:
+                    exploreEvent = 'a cave'
+                    exploreEventItems = 'you got attacked by zombies. -health'
+                    health -= random.randint(1,3)
+                    done_exploring()
+                    return
+            else:
                 exploreEvent = 'a cave'
-                health -= random.randint(0,2)
+                exploreEventItems = 'mined some iron.'
+                iron += random.randint(0,5)
+                done_exploring()
+                return
+        elif random.randint(1,1) == 1:
+            exploreEventItems = 'nothing else'
+            exploreEvent = 'a portal'
+            portalFound = 'true'
+            done_exploring()
+            return
+        # Events for if nothing happens
+        else:
+            if random.randint(1,3) == 1:
+                wood += random.randint(0,2)
+                stone += random.randint(0,1)
+                wheat += random.randint(0,3)
+                exploreEvent = 'nothing'
+                exploreEventItems = 'got some scraps from the ground'
                 done_exploring()
                 return
             else:
-                exploreEvent = 'a cave'
-                exploreEventItems = 'you got attacked by zombies. -health'
-                health -= random.randint(1,3)
+                exploreEventItems = 'nothing happened'
+                exploreEvent = 'nothing'
                 done_exploring()
                 return
-        else:
-            exploreEvent = 'a cave'
-            exploreEventItems = 'mined some iron.'
-            iron += random.randint(0,5)
-            done_exploring()
-            return
-    # Events for if nothing happens
-    else:
-        if random.randint(1,3) == 1:
-            wood += random.randint(0,2)
-            stone += random.randint(0,1)
-            wheat += random.randint(0,3)
-            exploreEvent = 'nothing'
-            exploreEventItems = 'got some scraps from the ground'
-            done_exploring()
-            return
-        else:
-            exploreEventItems = 'nothing happened'
-        exploreEvent = 'nothing'
-        done_exploring()
+    elif dimension == 'hell':
+        print("""
+            This dimension has yet to be implemented! Please type 'portal' again to leave hell. 
+            You can suggest things to put in it on the Github page, thanks!
+            """)
+        main_loop()
         return
 
 # done_exploring() refers to when the 'explore' action finishes
@@ -105,7 +123,7 @@ def done_exploring():
 
 # main_loop() is the main game loop where most actions happen
 def main_loop():
-    global wood, stone, gold, inventory, action, craftingAction, exploreEventItems, bread, day, hunger, health, playAgain, exploreEvent, wheat, iron
+    global wood, stone, gold, inventory, action, craftingAction, exploreEventItems, bread, day, hunger, health, playAgain, exploreEvent, wheat, iron, dimension, portalFound, enterPortal
     while True:
         # The if statement below detects wether it's the final day(day 100) to see if the player should win
         if day == 100:
@@ -127,6 +145,9 @@ def main_loop():
                 day = 0
                 health = 12
                 playAgain = ''
+                dimension = 'overworld'
+                portalFound = 'false'
+                enterPortal = ''
                 main_loop()
                 return
             elif playAgain == 'no' or playAgain == 'No':
@@ -160,12 +181,17 @@ def main_loop():
                 day = 0
                 health = 12
                 playAgain = ''
+                dimension = 'overworld'
+                portalFound = 'false'
+                enterPortal = ''
                 main_loop()
                 return
             elif playAgain == 'no' or playAgain == 'No':
                 break
-        # The next bit displays the players' current stats
+        # The next bit displays the player's current stats and positions
         print(f"""
+        Current Dimension:{dimension}
+        Days remaining:{100 - day}
         Health:{health}
         Hunger:{hunger}
         Day:{day}
@@ -199,7 +225,7 @@ def main_loop():
             Foods:
                 bread: 3 wheat per
             """)
-            # The next few parts are part of the crafting system
+            # The next few parts are the crafting system
             craftingAction = input("What do you want to craft? ")
             
             if craftingAction == 'stone axe':
@@ -271,7 +297,8 @@ def main_loop():
                 difficulty - allows you to change the difficulty
                 objective - displays how to beat the game
                 nothing - you do nothing but rest, there's also a 1/3 chance you heal some
-            Locations/Events + chances:
+                portal - if you have found a portal then you can use this to enter and exit it
+            Locations and Events + chances:
                 Found scraps: 1/3
                 Village: 1/12
                 Tree: 1/6
@@ -289,13 +316,48 @@ def main_loop():
             pass
         elif action == 'objective':
             print("Your objective is to survive 100 days")
-            print(f"Days remaining: {100 - day}")
         elif action == 'nothing':
             print("You decide to rest and do nothing for the day")
             if random.randint(1,3) == 1 and health < 12:
                 health += random.randint(1,2)
                 print("You gained back some health")
             day += 1
+        elif action == 'portal':
+            if portalFound == 'true':
+                if dimension == 'overworld':
+                    enterPortal = input("Do you want to enter the portal? y/n ")
+                    if enterPortal == 'y' or enterPortal == 'Y' or enterPortal == 'yes' or enterPortal == 'Yes':
+                        dimension = 'hell'
+                        print("You decided to enter the portal and enter hell.")
+                        main_loop()
+                        return
+                    elif enterPortal == 'no' or enterPortal == 'No' or enterPortal == 'n' or enterPortal == 'N':
+                        print("You decided not to enter the portal.")
+                        main_loop()
+                        return
+                    else:
+                        print("Not a valid input!")
+                        main_loop()
+                        return
+                elif dimension == 'hell':
+                    enterPortal = input("Do you want to enter the portal and leave hell? y/n ")
+                    if enterPortal == 'y' or enterPortal == 'Y' or enterPortal == 'yes' or enterPortal == 'Yes':
+                        dimension = 'overworld'
+                        print("You decided to enter the portal and leave hell.")
+                        main_loop()
+                        return
+                    elif enterPortal == 'no' or enterPortal == 'No' or enterPortal == 'n' or enterPortal == 'N':
+                        print("You decided not to enter the portal.")
+                        main_loop()
+                        return
+                    else:
+                        print("Not a valid input!")
+                        main_loop()
+                        return
+            else:
+                print("You have not found the portal so you cannot enter it.")
+                main_loop()
+                return
         else:
             print("You decide to rest and do nothing for the day")
             day += 1
