@@ -2,9 +2,8 @@ import math
 import time
 import random
 import os
-import datetime
 
-# Variables
+# Variables to be defined when the program is ran
 wood = 5
 gold = 10
 stone = 5
@@ -24,6 +23,7 @@ dimension = 'overworld'
 portalFound = 'false'
 playAgain = ''
 enterPortal = ''
+clearDays = [3,6,8,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72,75,78,81,84,87,90,93,96,99]
 
 # clear_terminal() just clears the terminal for better visuals
 def clear_terminal():
@@ -35,14 +35,14 @@ def clear_terminal():
 
 # explore() is where the player has a random chance to find item(s), locations, or trigger an event
 def explore():
-    global wood, stone, inventory, exploreEventItems, exploreEvent, bread, wheat, iron, portalFound, dimension
+    global wood, stone, inventory, exploreEventItems, exploreEvent, bread, wheat, iron, portalFound, dimension, health
     if dimension == 'overworld':
         # Tree event
         if random.randint(1,6) == 1 and 'stone axe' in inventory or 'iron axe' in inventory:
             exploreEventItems = random.randint(3,8)
             exploreEvent = "a tree"
             wood += exploreEventItems
-            exploreEventItems = f"got +{exploreEventItems} wood"
+            exploreEventItems = f"+{exploreEventItems} wood"
             done_exploring()
             return
         # Stone event
@@ -50,12 +50,12 @@ def explore():
             exploreEventItems = random.randint(2,5)
             exploreEvent = "a large rock"
             stone += exploreEventItems
-            exploreEventItems = f"got +{exploreEventItems} stone"
+            exploreEventItems = f"+{exploreEventItems} stone"
             done_exploring()
             return
         # Village event
         elif random.randint(1,12) == 1:
-            exploreEventItems = random.randint(3,8)
+            exploreEventItems = random.randint(1,3)
             exploreEvent = 'village'
             bread += exploreEventItems
             exploreEventItems = f"+{exploreEventItems} bread"
@@ -82,7 +82,7 @@ def explore():
                 iron += random.randint(0,5)
                 done_exploring()
                 return
-        elif random.randint(1,1) == 1:
+        elif random.randint(1,10) == 1:
             exploreEventItems = 'nothing else'
             exploreEvent = 'a portal'
             portalFound = 'true'
@@ -105,8 +105,10 @@ def explore():
                 return
     elif dimension == 'hell':
         print("""
-            This dimension has yet to be implemented! Please type 'portal' again to leave hell. 
-            You can suggest things to put in it on the Github page, thanks!
+            This dimension has yet to be implemented! Please type 'portal' and confirm to leave hell.
+            You can suggest things to add to it on the project's Github page:
+            https://github.com/SimplyCodingStuff/Craftmine-Terminal-Edition
+            Thanks!
             """)
         main_loop()
         return
@@ -115,19 +117,26 @@ def explore():
 def done_exploring():
     global exploreEvent, exploreEventItems, day
     print(f"You explored and found {exploreEvent} and {exploreEventItems}")
-    # Reset exploreEventItems if needed
+    # Reset exploreEventItems
     exploreEventItems = ''
     day += 1
-    # No call to main_loop here; let main_loop continue naturally
+    # No call to main_loop here; let main_loop() continue naturally
     pass
 
 # main_loop() is the main game loop where most actions happen
 def main_loop():
-    global wood, stone, gold, inventory, action, craftingAction, exploreEventItems, bread, day, hunger, health, playAgain, exploreEvent, wheat, iron, dimension, portalFound, enterPortal
+    global wood, stone, gold, inventory, action, craftingAction, exploreEventItems, bread, day, hunger, health, playAgain, exploreEvent, wheat, iron, dimension, portalFound, enterPortal, clearDays
     while True:
-        # The if statement below detects wether it's the final day(day 100) to see if the player should win
+        if day in clearDays:
+            clear_terminal()
+        # The if statement below detects wether it's the final day (day 100) to see if the player should win
         if day == 100:
             print("You Survived, Congratulations!")
+            print("""
+            Thanks for playing! 
+            Consider following me for more updates and projects at:
+            https://github.com/SimplyCodingStuff
+            """)
             playAgain = input("Play again?Yes/No ")
             if playAgain == 'yes' or playAgain == 'Yes':
                 wood = 5
@@ -153,13 +162,13 @@ def main_loop():
             elif playAgain == 'no' or playAgain == 'No':
                 break
         exploreEventItems = ''
-        # The next two if statements change the player's hunger and automatically uses bread if hunger is greater than zero
+        # The next two if statements change the player's hunger and automatically consumes bread if hunger is greater than zero
         if bread == 0 or hunger == 0:
             hunger += 1
-        elif bread == 0 and hunger > 0:
+        elif bread > 0 and hunger > 0:
             bread = bread - 1
             hunger -= hunger
-        if hunger > 0 and bread == 0:
+        if hunger >= 6 and bread == 0:
             health -= random.randint(1,2)
         # The if statement below detects wether the player is dead or should be dead every game loop
         if health <= 0:
@@ -200,7 +209,7 @@ def main_loop():
             Gold:{gold}
             Stone:{stone}
             Bread:{bread}
-            Wheat:{wheat}")
+            Wheat:{wheat}
         Inventory:
             {inventory}
         Type 'help' for a list of actions
@@ -329,14 +338,17 @@ def main_loop():
                     if enterPortal == 'y' or enterPortal == 'Y' or enterPortal == 'yes' or enterPortal == 'Yes':
                         dimension = 'hell'
                         print("You decided to enter the portal and enter hell.")
+                        clear_terminal()
                         main_loop()
                         return
                     elif enterPortal == 'no' or enterPortal == 'No' or enterPortal == 'n' or enterPortal == 'N':
                         print("You decided not to enter the portal.")
+                        clear_terminal()
                         main_loop()
                         return
                     else:
                         print("Not a valid input!")
+                        clear_terminal()
                         main_loop()
                         return
                 elif dimension == 'hell':
