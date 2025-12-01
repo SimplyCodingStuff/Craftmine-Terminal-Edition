@@ -24,4 +24,4 @@ Nothing: everything else
 
 ## How to run
 To run the game first set the default app to the command prompt. Then double click the file to start the game. Also, make sure you have the latest version of Python.  
-If you don't then you can download it here: https://www.python.org/downloads/
+If you don't then you can download the latest version here: https://www.python.org/downloads/
