@@ -3,15 +3,16 @@ This is my first project and is the first version of my terminal-based text game
 It's writen in Python for simplicity(and because I'm trying to learn Python) and it's currently in version 1.0.0.  
 
 ## Actions
-help - brings up the help menu with all the actions  
-explore - you explore for the day  
-craft - you need to craft something  
-give up - you decide to lose  
-advanced resources - lists all the advance resources and how much of them you have  
-difficulty - allows you to change the difficulty  
-objective - displays how to beat the game  
-portal - asks you if you want to enter the portal if you have discovered a portal  
-nothing - you do nothing but rest, there's also a 1/3 chance you heal some  
+help - brings up this menu
+explore - you explore for the day
+craft - you need to craft something
+give up - you decide to lose
+advanced resources - lists all the advance resources and how much of them you have
+difficulty - allows you to change the difficulty
+objective - displays how to beat the game
+nothing - you do nothing but rest, there's also a 1/3 chance you heal some
+portal - if you have found a portal then you can use this to enter and exit it
+music - allows you to start playing more music
 
 ## Locations and Events + chances
 Found scraps: 1/3  
