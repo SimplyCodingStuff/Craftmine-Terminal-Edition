@@ -4,7 +4,7 @@ It's writen in Python for simplicity(and because I'm trying to learn Python) and
 **PLEASE DOWNLOAD FROM THE RELEASE PAGE**
 
 ## Actions
-help - brings up this menu  
+help - brings up a menu that lists actions  
 explore - you explore for the day  
 craft - you need to craft something  
 give up - you decide to lose  
