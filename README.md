@@ -28,7 +28,7 @@ Nothing: everything else
 To run the game first set the default app to the command prompt. Then double click the file to start the game. Also, make sure you have the latest version of Python  
 If you don't then you can download the latest version here: **https://www.python.org/downloads/**
 
-_Notice: This game contains music by from Minecraft by C418:_  
+_Notice: This game contains music by from Minecraft by C418, Kumi Tanioka, and Lena Raine:_  
 _-Danny_  
 _-Haggstrom_  
 _-Subwoofer Lullaby_  
