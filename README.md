@@ -13,7 +13,8 @@ difficulty - allows you to change the difficulty
 objective - displays how to beat the game  
 nothing - you do nothing but rest, there's also a 1/3 chance you heal some  
 portal - if you have found a portal then you can use this to enter and exit it  
-music - allows you to start playing more music  
+rand music - allows you to play a random song
+select music - allows you to select a song to play from a list
 
 ## Locations and Events + chances
 Found scraps: 1/3  
