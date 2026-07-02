@@ -1,6 +1,6 @@
 # Craftmine: Terminal Edition
 This is my first project and is the first version of my terminal-based text game where you try and survive 100 days  
-It's writen in Python for simplicity(and because I'm trying to learn Python)  
+It's writen in Python for simplicity(and because I'm learning Python)  
 I thought this would be a good little game to play if you have a pocket computer or Raspberry Pi pocket deivce  
 
 ## Actions
@@ -26,7 +26,7 @@ Getting attacked in a cave: 1/6
 Nothing: everything else  
 
 ## How to run
-To run the game first set the default app to the command prompt. Then double click the file to start the game. Also, make sure you have the latest version of Python  
+To run the game first set the default app to the version of Python you have installed. Then double click the file to start the game. Also, be sure to use the provided venv(virtual environment) in order for some of the Python modules to work properly  
 **If you don't then you can download the latest version here: https://www.python.org/downloads/**
 
 _Notice: This game contains music by from Minecraft by C418, Kumi Tanioka, and Lena Raine:_  
