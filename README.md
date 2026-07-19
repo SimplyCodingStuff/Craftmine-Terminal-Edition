@@ -26,8 +26,8 @@ Getting attacked in a cave: 1/6
 Nothing: everything else  
 
 ## How to run
-To run the game first set the default app to the version of Python you have installed. Then double click the file to start the game. Also, be sure to use the provided venv(virtual environment) in order for some of the Python modules to work properly  
-**If you don't then you can download the latest version here: https://www.python.org/downloads/**
+To run the game first set the default app to Python 3.13.14. Then double click the file to start the game.  
+**If you don't have Python 3.13.14(or earlier) then you can download it here: https://www.python.org/downloads/release/python-31314/**
 
 _Notice: This game contains music by from Minecraft by C418, Kumi Tanioka, and Lena Raine:_  
 _-Danny_  
